@@ -15,15 +15,17 @@ func main() {
 		errs <- errors.New("nope")
 	}()
 
-	for {
+	var running bool
+	running = true
+
+	for running {
 		select {
 		case m := <-msgs:
 			fmt.Println("got msg", m)
 		case err := <-errs:
 			fmt.Println("got error", err)
-			goto Finished
+			running = false
 		}
 	}
-Finished:
 	fmt.Println("we are done")
 }
