@@ -1,0 +1,5 @@
+# Ignore binary
+goleveldb-test
+
+# Ignore db directory
+db
