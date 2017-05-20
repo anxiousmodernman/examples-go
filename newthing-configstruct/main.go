@@ -2,14 +2,21 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io/ioutil"
 	"log"
 )
 
+var (
+	confPath = flag.String("conf", "conf.json", "path to config file")
+)
+
 func main() {
 
-	conf, err := NewConfig("conf.json")
+	flag.Parse()
+
+	conf, err := NewConfig(*confPath)
 	if err != nil {
 		log.Fatal(err)
 	}
