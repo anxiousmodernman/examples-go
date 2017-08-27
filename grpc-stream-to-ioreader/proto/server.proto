@@ -1,0 +1,46 @@
+syntax = "proto3";
+package server;
+
+import "google/api/annotations.proto";
+
+service MyService {
+
+    // PutStream lets the client send a stream of bytes over gRPC.
+    rpc PutStream(stream Fragment) returns (Result) {}
+
+}
+
+// Fragment is our union of the types can we can pass to PutStream.
+message Fragment {
+
+    oneof msg {
+
+        // Metadata is a "header" for our stream.
+        Metadata metadata = 1;
+
+        // Chunk is a way to deliver a stream of []byte
+        Chunk chunk = 2;
+    }
+}
+
+// Metadata is our stream's "header". Our server expects exactly one Metadata
+// message at the beginning of a PutStream request.
+message Metadata {
+   // name is the name of our stream.
+   string name = 1;
+   // length is the expected total number of bytes.
+   int64 length = 2;
+}
+
+// Chunk is our message envelope for a raw chunk of bytes. Our server expects
+// a series of these after the Metadata header.
+message Chunk {
+   // data is our raw data
+   bytes data = 1;
+}
+
+// Result is the result of a PutStream call.
+message Result {  
+   string msg = 1;
+}
+
