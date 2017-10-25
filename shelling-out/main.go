@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	c := exec.Command("git", "status")
+	c := exec.Command("bash", "-c", "git", "status")
 	r, err := c.StdoutPipe()
 	if err != nil {
 		log.Fatal(err)
