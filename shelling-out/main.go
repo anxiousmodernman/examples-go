@@ -2,7 +2,9 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"os/exec"
@@ -10,11 +12,14 @@ import (
 )
 
 func main() {
-	c := exec.Command("bash", "-c", "git", "status")
+
+	//c := exec.Command("bash", "-c", "git", "status")
+	c := exec.Command("bash")
 	r, err := c.StdoutPipe()
 	if err != nil {
 		log.Fatal(err)
 	}
+	stdin, _ := c.StdinPipe()
 
 	scnr := bufio.NewScanner(r)
 	lines := make(chan string)
@@ -32,6 +37,13 @@ func main() {
 	if err := c.Start(); err != nil {
 		log.Fatal(err)
 	}
+
+	script := `
+	ls
+	echo foobar
+	echo $PATH
+	`
+	io.Copy(stdin, bytes.NewBuffer([]byte(script)))
 
 	timeout := time.After(1 * time.Second)
 
