@@ -1,0 +1,6 @@
+
+# ignore executable
+boltdb-buffer
+
+# ignore boltdb file
+*.db
