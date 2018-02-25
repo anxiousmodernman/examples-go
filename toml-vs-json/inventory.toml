@@ -1,0 +1,19 @@
+
+
+[hosts]
+
+  [[hosts.dev]]
+  ip = "10.0.0.1"
+  name = "db"
+
+  [[hosts.dev]]
+  ip = "10.0.0.2"
+  name = "nginx"
+
+  [[hosts.prod]]
+  ip = "10.1.0.1"
+  name = "db"
+
+  [[hosts.prod]]
+  ip = "10.1.0.2"
+  name = "nginx"
