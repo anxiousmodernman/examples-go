@@ -2,18 +2,18 @@
 
 [hosts]
 
-  [[hosts.dev]]
+  [[hosts.dc1.dev]]
   ip = "10.0.0.1"
   name = "db"
 
-  [[hosts.dev]]
+  [[hosts.dc1.dev]]
   ip = "10.0.0.2"
   name = "nginx"
 
-  [[hosts.prod]]
+  [[hosts.dc1.prod]]
   ip = "10.1.0.1"
   name = "db"
 
-  [[hosts.prod]]
+  [[hosts.dc1.prod]]
   ip = "10.1.0.2"
   name = "nginx"
